@@ -1,0 +1,323 @@
+<head>
+    <style>
+        img {
+            border-radius: 10px;
+        }
+
+        .tab {
+            display: inline-block;
+            margin-left: 40px;
+        }
+
+        p,
+        h1,
+        h2,
+        h3 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .code {
+            font-family: "Lucida Console", "Courier New", monospace;
+            background-color: black;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lab Assignment #6: Relay & Motor, Servo, Stepper Motor, LCD 1602<br>
+        2023-10-29</h1>
+
+    <h2>Lab 17.1</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab17_1.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab17_1.mov" type="video/mp4">
+    </video>
+
+    <h2>Lab 17.2</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab17_2.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab17_2.mov" type="video/mp4">
+    </video>
+
+    <h2>Lab 18.1</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab18_1.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab18_1.mov" type="video/mp4">
+    </video>
+
+    <h2>Lab 18.2</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab18_2.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab18_2.mov" type="video/mp4">
+    </video>
+
+    <h2>Lab 19.1</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab19_1.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab19_1.mov" type="video/mp4">
+    </video>
+
+    <h2>Lab 20.1</h2>
+    <h3>Breadboard Settings</h3>
+    <img src="Lab20_1.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Lab20_1.mov" type="video/mp4">
+    </video>
+
+    <h2>Project #1</h2>
+
+    <h3>Description of what the lab assignment is about</h3>
+    <p>This lab assignment is about being able to properly use the combination of Thonny, ESP32, and components such
+        as<br>
+        a hand will wave when the lights turn off and sad music plays with a sad song
+    </p>
+
+    <h3>List of Hardware Compnents</h3>
+
+    <ul>
+        <li>1 x LED's (red)</li>
+        <li>10 x wires</li>
+        <li>1 x 220-ohm resistor</li>
+        <li>1 x 1k-ohm resistor</li>
+        <li>1 x 10k-ohm resistor</li>
+        <li>1 x Passive Buzzer</li>
+        <li>1 x NPN Transistor</li>
+        <li>1 x Photoresistor</li>
+        <li>1 x Servo Motor</li>
+        <li>ESP 32</li>
+    </ul>
+    <h3>Circuit Diagram</h3>
+    <img src="Project_1_CircuitDiagram.jpg" width="708" height="531">
+
+    <h3>Breadboard Diagram</h3>
+    <img src="Project_1_BreadboardView.jpg" width="1400" height="531">
+
+    <h3>Breadboard Settings</h3>
+    <img src="Project_1.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Project_1.mov" type="video/mp4">
+    </video>
+
+    <h3>Source Code</h3>
+    <p class="code">
+        from machine import Pin, PWM, ADC<br>
+        import time<br>
+        from myservo import myServo<br>
+        <br>
+        adc = ADC(Pin(36))<br>
+        <span class="tab"></span>adc.atten(ADC.ATTN_11DB)<br>
+        <span class="tab"></span>adc.width(ADC.WIDTH_10BIT)<br>
+        <br>
+        led = Pin(18, Pin.OUT)<br>
+        <br>
+        passiveBuzzer = PWM(Pin(13), 2000)<br>
+        <br>
+        <span class="tab"></span>passiveBuzzer.deinit()<br>
+        <br>
+        servo = myServo(15) # set servo pin<br>
+        <span class="tab"></span>servo.myServoWriteAngle(0) # Set Servo Angle<br>
+        <br>
+        C = 1047<br>
+        D = 1175<br>
+        E = 1319<br>
+        F = 1397<br>
+        G = 1568<br>
+        B = 1976<br>
+        A = 1760<br>
+        C7 = 2093<br>
+        D7 = 2349<br>
+        E7 = 2637<br>
+        <br>
+        auldLangSyne = [D,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>G, G, G, B,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>A, G, A, B,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>G, G, B, D7,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>E7, E7,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>D7, B, B, G,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>A, G, A, B, A,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>G, E, E, D,<br>
+        <span class="tab"></span>]<br>
+        <br>
+        auldLangSyneTime = [400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>1200, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 200, 200,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>600, 200, 400, 400,<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>1200<br>
+        ]<br>
+        <br>
+        def playSong(songNotes, songTime):<br>
+        <span class="tab"></span>passiveBuzzer.init()<br>
+        <span class="tab"></span>for i in range(len(songNotes)):<br>
+        <span class="tab"></span><span class="tab"></span>passiveBuzzer.freq(songNotes[i])<br>
+        <span class="tab"></span><span class="tab"></span>time.sleep_ms((songTime[i]))<br>
+        <span class="tab"></span><span class="tab"></span>passiveBuzzer.freq(10)<br>
+        <span class="tab"></span><span class="tab"></span>if i % 2 == 0:<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>led.value(1)<br>
+        <span class="tab"></span><span class="tab"></span>else:<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>led.value(0)<br>
+        <span class="tab"></span><span class="tab"></span>moveHand()<br>
+        <span class="tab"></span><span class="tab"></span>time.sleep_ms(50)<br>
+        <span class="tab"></span>led.value(0)<br>
+        <span class="tab"></span>passiveBuzzer.deinit()<br>
+        <br>
+        global handAngle<br>
+        handAngle = 0<br>
+        global clockWise<br>
+        clockWise = True<br>
+        <br>
+        def moveHand():<br>
+        <span class="tab"></span>global handAngle<br>
+        <span class="tab"></span>if clockWise:<br>
+        <span class="tab"></span><span class="tab"></span>handAngle += 18<br>
+        <span class="tab"></span><span class="tab"></span>if handAngle > 180:<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>handAngle = 180<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>clockWise = False<br>
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>handAngle -= 18<br>
+        <span class="tab"></span>else:<br>
+        <span class="tab"></span><span class="tab"></span>handAngle -= 18<br>
+        <span class="tab"></span><span class="tab"></span>if handAngle < 0:<br>
+            <span class="tab"></span><span class="tab"></span><span class="tab"></span>handAngle = 0<br>
+            <span class="tab"></span><span class="tab"></span><span class="tab"></span>clockWise = False<br>
+            <span class="tab"></span><span class="tab"></span><span class="tab"></span>handAngle += 18<br>
+            <span class="tab"></span>servo.myServoWriteAngle(handAngle)<br>
+            <br>
+            try:<br>
+            <span class="tab"></span>while True:<br>
+            <span class="tab"></span><span class="tab"></span>adcValue = adc.read()<br>
+            <span class="tab"></span><span class="tab"></span>print(adc.read())<br>
+            <span class="tab"></span><span class="tab"></span>if adcValue > 300:<br>
+            <span class="tab"></span><span class="tab"></span><span class="tab"></span>playSong(auldLangSyne,
+            auldLangSyneTime)<br>
+            <span class="tab"></span><span class="tab"></span><span class="tab"></span>break<br>
+            <span class="tab"></span><span class="tab"></span>time.sleep_ms(100)<br>
+            <br>
+            except:<br>
+            <span class="tab"></span>servo.deinit()<br>
+            <span class="tab"></span>passiveBuzzer.deinit()<br>
+
+    </p>
+
+    <h2>Project #2</h2>
+
+    <h3>Description of what the lab assignment is about</h3>
+    <p>This lab assignment is about being able to properly use the combination of Thonny, ESP32, and components such
+        that<br>
+        a fan can turn on when it gets too hot and displays a message.
+    </p>
+
+    <h3>List of Hardware Compnents</h3>
+
+    <ul>
+        <li>1 x LED (red)</li>
+        <li>12 x wires</li>
+        <li>1x LCD</li>
+        <li>1 x NPN Transistor</li>
+        <li>1 x 220-ohm resistor</li>
+        <li>1 x 1k-ohm resistor</li>
+        <li>1 x 10k-ohm resistor</li>
+        <li>1 x Diode</li>
+        <li>1 x Relay</li>
+        <li>1 x Motor</li>
+        <li>1 x Thermistor</li>
+        <li>ESP 32</li>
+    </ul>
+
+    <h3>Circuit Diagram</h3>
+    <img src="Project_2_CircuitDiagram.jpg" width="708" height="531">
+
+    <h3>Breadboard Diagram</h3>
+    <img src="Project_2_BreadboardView.jpg" width="1400" height="531">
+
+    <h3>Breadboard Settings</h3>
+    <img src="Project_2.jpg" width="1000" height="708">
+
+    <h3>Video</h3>
+    <video controls autoplay>
+        <source src="Project_2.mov" type="video/mp4">
+    </video>
+
+    <h3>Source Code</h3>
+    <p class="code">
+
+        from machine import Pin, ADC, I2C
+        import time
+        import math
+        from I2C_LCD import I2cLcd
+
+        adc = ADC(Pin(36))
+        <span class="tab"></span>adc.atten(ADC.ATTN_11DB)
+        <span class="tab"></span>adc.width(ADC.WIDTH_12BIT)
+
+        relay = Pin(13, Pin.OUT)
+
+        i2c = I2C(scl=Pin(14), sda=Pin(12), freq=400000)
+        devices = i2c.scan()
+        if len(devices) == 0:
+        <span class="tab"></span>print("No i2c device !")
+        else:
+        <span class="tab"></span>for device in devices:
+        <span class="tab"></span><span class="tab"></span>print("I2C addr: " + hex(device))
+        <span class="tab"></span><span class="tab"></span>lcd = I2cLcd(i2c, device, 2, 16)
+
+        def reverseRelay():
+        <span class="tab"></span>if relay.value():
+        <span class="tab"></span><span class="tab"></span>print(relay.value())
+        <span class="tab"></span><span class="tab"></span>relay.value(0)
+        <span class="tab"></span>else:
+        <span class="tab"></span><span class="tab"></span>relay.value(1)
+
+        try:
+        <span class="tab"></span>while True:
+        <span class="tab"></span><span class="tab"></span># thermomitor
+        <span class="tab"></span><span class="tab"></span>adcValue = adc.read()
+        <span class="tab"></span><span class="tab"></span>voltage = adcValue / 4095 * 3.3
+        <span class="tab"></span><span class="tab"></span>Rt = 10 * voltage / (3.3 - voltage)
+        <span class="tab"></span><span class="tab"></span>tempK = 1 / (1 / (273.15 + 25) + (math.log(Rt / 10)) / 3950)
+        <span class="tab"></span><span class="tab"></span>tempC = tempK - 273.15
+        <span class="tab"></span><span class="tab"></span>print("ADC value:", adcValue, "\tVoltage :", voltage,
+        "\tTemperature :", tempC)
+        <span class="tab"></span><span class="tab"></span>print("working")
+        <span class="tab"></span><span class="tab"></span>time.sleep_ms(500)
+        <span class="tab"></span><span class="tab"></span>if tempC > 27:
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>lcd.move_to(0, 0)
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>lcd.putstr("Cool yourself")
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>while tempC > 27:
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span><span
+            class="tab"></span>reverseRelay()
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span><span
+            class="tab"></span>time.sleep_ms(1000)
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>lcd.move_to(0, 0)
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>lcd.putstr("Good temperature")
+        <span class="tab"></span><span class="tab"></span><span class="tab"></span>break
+        except:
+        <span class="tab"></span>pass
+
+
+    </p>
+
+
+</body>
